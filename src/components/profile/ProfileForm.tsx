@@ -27,7 +27,7 @@ export default function ProfileForm({ data }: ProfileFormProps) {
   return (
     <>
       <div className="mx-auto max-w-3xl g">
-        <h1 className="text-5xl font-black   ">Mi Perfil</h1>
+        <h1 className="text-5xl font-black">Mi Perfil</h1>
         <p className="text-2xl font-light text-gray-500 mt-5">Aquí puedes actualizar tu información</p>
 
         <form
@@ -57,18 +57,18 @@ export default function ProfileForm({ data }: ProfileFormProps) {
           <div className="mb-5 space-y-3">
             <label
               className="text-sm uppercase font-bold"
-              htmlFor="password"
-            >E-mail</label>
+              htmlFor="email"
+            >Correo electronico</label>
             <input
-              id="text"
-              type="email"
-              placeholder="Tu Email"
+              id="email"
+              type="text"
+              placeholder="Tu correo"
               className="w-full p-3  border border-gray-200"
               {...register("email", {
-                required: "EL e-mail es obligatorio",
+                required: "EL correo electronico es obligatorio",
                 pattern: {
                   value: /\S+@\S+\.\S+/,
-                  message: "E-mail no válido",
+                  message: "correo electronico no válido",
                 },
               })}
             />
