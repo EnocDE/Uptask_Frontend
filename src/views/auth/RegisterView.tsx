@@ -7,20 +7,20 @@ import { createAccount } from "@/api/AuthAPI";
 import { toast } from "react-toastify";
 
 export default function RegisterView() {
-	const initialValues: UserRegistrationForm = {
-		name: "",
-		email: "",
-		password: "",
-		password_confirmation: "",
-	};
+  const initialValues: UserRegistrationForm = {
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+  };
 
-	const {
-		register,
-		handleSubmit,
-		watch,
-		reset,
-		formState: { errors },
-	} = useForm<UserRegistrationForm>({ defaultValues: initialValues });
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm<UserRegistrationForm>({ defaultValues: initialValues });
 
   const { mutate } = useMutation({
     mutationFn: createAccount,
@@ -31,118 +31,119 @@ export default function RegisterView() {
     }
   })
 
-	const password = watch("password");
+  const password = watch("password");
 
-	const handleRegister = (formData: UserRegistrationForm) => mutate(formData)
+  const handleRegister = (formData: UserRegistrationForm) => mutate(formData)
 
-	return (
-		<>
-			<h1 className="text-5xl font-black text-white">Crear Cuenta</h1>
-			<p className="text-2xl font-light text-white mt-5">
-				Llena el formulario para {""}
-				<span className=" text-fuchsia-500 font-bold"> crear tu cuenta</span>
-			</p>
+  return (
+    <>
+      <h1 className="text-5xl font-black text-white">Crear Cuenta</h1>
+      <p className="text-2xl font-light text-white mt-5">
+        Llena el formulario para {""}
+        <span className=" text-fuchsia-500 font-bold"> crear tu cuenta</span>
+      </p>
 
-			<form
-				onSubmit={handleSubmit(handleRegister)}
-				className="space-y-8 p-10  bg-white mt-10"
-				noValidate
-			>
-				<div className="flex flex-col gap-5">
-					<label className="font-normal text-2xl" htmlFor="email">
-						Email
-					</label>
-					<input
-						id="email"
-						type="email"
-						placeholder="Email de Registro"
-						className="w-full p-3  border-gray-300 border"
-						{...register("email", {
-							required: "El Email de registro es obligatorio",
-							pattern: {
-								value: /\S+@\S+\.\S+/,
-								message: "E-mail no válido",
-							},
-						})}
-					/>
-					{errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
-				</div>
+      <form
+        onSubmit={handleSubmit(handleRegister)}
+        className="space-y-8 p-10  bg-white mt-10"
+        noValidate
+      >
+        <div className="flex flex-col gap-5">
+          <label className="font-normal text-2xl" htmlFor="email">
+            Correo
+          </label>
+          <input
+            id="email"
+            type="email"
+            placeholder="Correo de Registro"
+            className="w-full p-3  border-gray-300 border"
+            {...register("email", {
+              required: "El correo de registro es obligatorio",
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: "Correo no válido",
+              },
+            })}
+          />
+          {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
+        </div>
 
-				<div className="flex flex-col gap-5">
-					<label className="font-normal text-2xl">Nombre</label>
-					<input
-						type="name"
-						placeholder="Nombre de Registro"
-						className="w-full p-3  border-gray-300 border"
-						{...register("name", {
-							required: "El Nombre de usuario es obligatorio",
-						})}
-					/>
-					{errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
-				</div>
+        <div className="flex flex-col gap-5">
+          <label htmlFor="name" className="font-normal text-2xl">Nombre</label>
+          <input
+            id="name"
+            type="name"
+            placeholder="Nombre de Registro"
+            className="w-full p-3  border-gray-300 border"
+            {...register("name", {
+              required: "El Nombre de usuario es obligatorio",
+            })}
+          />
+          {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
+        </div>
 
-				<div className="flex flex-col gap-5">
-					<label className="font-normal text-2xl">Password</label>
+        <div className="flex flex-col gap-5">
+          <label className="font-normal text-2xl">Contraseña</label>
 
-					<input
-						type="password"
-						placeholder="Contraseña de Registro"
-						className="w-full p-3  border-gray-300 border"
-						{...register("password", {
-							required: "La contraseña es obligatoria",
-							minLength: {
-								value: 8,
-								message: "La contraseña debe ser contener mínimo 8 caracteres",
-							},
-						})}
-					/>
-					{errors.password && (
-						<ErrorMessage>{errors.password.message}</ErrorMessage>
-					)}
-				</div>
+          <input
+            type="password"
+            placeholder="Contraseña de Registro"
+            className="w-full p-3  border-gray-300 border"
+            {...register("password", {
+              required: "La contraseña es obligatoria",
+              minLength: {
+                value: 8,
+                message: "La contraseña debe ser contener mínimo 8 caracteres",
+              },
+            })}
+          />
+          {errors.password && (
+            <ErrorMessage>{errors.password.message}</ErrorMessage>
+          )}
+        </div>
 
-				<div className="flex flex-col gap-5">
-					<label className="font-normal text-2xl">Repetir Password</label>
+        <div className="flex flex-col gap-5">
+          <label className="font-normal text-2xl">Repetir Contraseña</label>
 
-					<input
-						id="password_confirmation"
-						type="password"
-						placeholder="Repite la contraseña de Registro"
-						className="w-full p-3  border-gray-300 border"
-						{...register("password_confirmation", {
-							required: "Repetir la contraseña es obligatorio",
-							validate: (value) =>
-								value === password || "Las contraseñas no coinciden",
-						})}
-					/>
+          <input
+            id="password_confirmation"
+            type="password"
+            placeholder="Repite la contraseña de Registro"
+            className="w-full p-3  border-gray-300 border"
+            {...register("password_confirmation", {
+              required: "Repetir la contraseña es obligatorio",
+              validate: (value) =>
+                value === password || "Las contraseñas no coinciden",
+            })}
+          />
 
-					{errors.password_confirmation && (
-						<ErrorMessage>{errors.password_confirmation.message}</ErrorMessage>
-					)}
-				</div>
+          {errors.password_confirmation && (
+            <ErrorMessage>{errors.password_confirmation.message}</ErrorMessage>
+          )}
+        </div>
 
-				<input
-					type="submit"
-					value="Registrarme"
-					className="bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3  text-white font-black  text-xl cursor-pointer transition-colors"
-				/>
-			</form>
+        <input
+          type="submit"
+          value="Registrarme"
+          className="bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3  text-white font-black  text-xl cursor-pointer transition-colors"
+        />
+      </form>
 
-			<nav className="mt-10 flex flex-col space-y-4">
-				<Link
-					to={"/auth/login"}
-					className="text-center text-gray-300 font-normal"
-				>
-					¿Ya tienes cuenta? Inicia sesión
-				</Link>
+      <nav className="mt-10 flex flex-col space-y-4">
+        <Link
+          to={"/auth/login"}
+          className="text-center text-gray-300 font-normal"
+        >
+          ¿Ya tienes cuenta? Inicia sesión
+        </Link>
 
-				<Link
-					to={"/auth/forgot-password"}
-					className="text-center text-gray-300 font-normal"
-				>
-					¿Olvidaste tu contraseña? Restablecela
-				</Link>
-			</nav>
-		</>
-	);
+        <Link
+          to={"/auth/forgot-password"}
+          className="text-center text-gray-300 font-normal"
+        >
+          ¿Olvidaste tu contraseña? Restablecela
+        </Link>
+      </nav>
+    </>
+  );
 }
