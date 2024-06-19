@@ -17,16 +17,16 @@ export default function LoginView() {
 		formState: { errors },
 	} = useForm({ defaultValues: initialValues });
 
-	const { mutate } = useMutation({
+	const { mutate, isSuccess } = useMutation({
 		mutationFn: authenticateUser,
 		onError: (error) => toast.error(error.message)
 	});
 
 	const handleLogin = (formData: UserLoginForm) => mutate(formData);
 
-  if (localStorage.getItem('AUTH_TOKEN')) {
-    return <Navigate to='/' />
-  }
+	if (isSuccess) {
+		return <Navigate to={'/'}/>
+	}
 
 	return (
 		<>
@@ -45,18 +45,18 @@ export default function LoginView() {
 				noValidate
 			>
 				<div className="flex flex-col gap-5">
-					<label className="font-normal text-2xl">Email</label>
+					<label htmlFor="email" className="font-normal text-2xl">Correo</label>
 
 					<input
 						id="email"
 						type="email"
-						placeholder="Tu Email"
+						placeholder="Tu Correo"
 						className="w-full p-3 border-gray-300 border"
 						{...register("email", {
-							required: "El Email es obligatorio",
+							required: "El correo es obligatorio",
 							pattern: {
 								value: /\S+@\S+\.\S+/,
-								message: "E-mail no válido",
+								message: "Correo no válido",
 							},
 						})}
 					/>
@@ -64,14 +64,14 @@ export default function LoginView() {
 				</div>
 
 				<div className="flex flex-col gap-5">
-					<label className="font-normal text-2xl">Password</label>
+					<label htmlFor="password" className="font-normal text-2xl">Contraseña</label>
 
 					<input
 						type="password"
 						placeholder="Tu Contraseña"
 						className="w-full p-3  border-gray-300 border"
 						{...register("password", {
-							required: "El Password es obligatorio",
+							required: "La contraseña es obligatoria",
 						})}
 					/>
 					{errors.password && (
