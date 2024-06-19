@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "author": "Enoc Dominguez",
   "scripts": {
     "mobile": "npx vite --host 192.168.1.64",
     "dev": "vite",
