@@ -40,17 +40,17 @@ export default function RegisterView() {
                     <label
                         className="font-normal text-2xl"
                         htmlFor="email"
-                    >Email</label>
+                    >Correo</label>
                     <input
                         id="email"
                         type="email"
-                        placeholder="Email de Registro"
+                        placeholder="Correo de Registro"
                         className="w-full p-3 rounded-lg border-gray-300 border"
                         {...register("email", {
-                            required: "El Email de registro es obligatorio",
+                            required: "El correo de registro es obligatorio",
                             pattern: {
                                 value: /\S+@\S+\.\S+/,
-                                message: "E-mail no válido",
+                                message: "Correo no válido",
                             },
                         })}
                     />
