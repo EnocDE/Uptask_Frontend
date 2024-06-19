@@ -24,7 +24,7 @@ export default function EditProjectForm({data, projectId} : EditProjectFormProps
     mutationFn: updateProject,
     onError: (error) => toast.error(error.message),
     onSuccess: (data) => {
-      // Desactiva el cache para mantener siempre lo datos actualizados 
+      // Invalida el cache para mantener siempre lo datos actualizados 
       queryClient.invalidateQueries({queryKey: ['projects']})
       queryClient.invalidateQueries({queryKey: ['editProject', projectId]})
       toast.success(data);
