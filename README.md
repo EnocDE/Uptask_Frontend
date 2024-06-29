@@ -5,6 +5,9 @@
 ### Descripción
 Uptask es un organizador de proyectos el cual nos permite llevar el control de los usuarios, las tareas, sus estados, también permite ver quien y cuando se cambio el estado de las tareas del proyecto, asi como realizar comentarios en las tareas como feedback.
 
+### Vista en vivo
+[link aqui](https://uptask-frontend-one.vercel.app/projects/6632f58168dcbbe2dcb10135)
+
 ### Tecnologías
 - React.js
 - React Query
